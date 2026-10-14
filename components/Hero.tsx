@@ -201,8 +201,8 @@ export default function Hero() {
           style={{ x: spX, y: spY }}
         >
           <Image
-            src="/images/shah-notebook.webp"
-            alt="Dr. Shahzaib Hamid holding a hand-drawn patient acquisition plan"
+            src="/images/shah-headshot.webp"
+            alt="Dr. Shahzaib Hamid, Founder & CEO of CodeSquad"
             fill
             sizes="(max-width: 860px) 60vw, 35vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
