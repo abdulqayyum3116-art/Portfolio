@@ -60,12 +60,12 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 400 17px/1.6 'DM Sans', system-ui, sans-serif;
+  font: 400 17px/1.6 var(--font-dm-sans, 'DM Sans'), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 h1, h2, h3 {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-fraunces, Fraunces), Georgia, serif;
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.02em;
@@ -73,7 +73,7 @@ h1, h2, h3 {
 }
 
 .hand {
-  font-family: Caveat, 'Comic Sans MS', cursive;
+  font-family: var(--font-caveat, Caveat), 'Comic Sans MS', cursive;
   font-weight: 700;
   color: var(--coral);
   line-height: 1;

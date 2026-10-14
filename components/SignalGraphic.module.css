@@ -1,6 +1,8 @@
 .signal {
-  background: var(--ink);
+  /* Fixed navy in both themes: the SVG strokes are tuned for a dark card */
+  background: #1B1B3A;
   color: #FFF4E8;
+  border: 2px solid var(--line);
   border-radius: 48px;
   padding: 60px 48px;
   display: grid;

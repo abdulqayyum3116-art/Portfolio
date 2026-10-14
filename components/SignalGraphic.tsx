@@ -36,7 +36,7 @@ export default function SignalGraphic() {
       <div className={styles.signal} ref={ref}>
         {/* Left text */}
         <div>
-          <span className="hand" style={{ color: 'var(--butter)', fontSize: '26px' }}>
+          <span className="hand" style={{ color: '#FFE29A', fontSize: '26px' }}>
             why gait analysis?
           </span>
           <h2 className={styles.heading}>

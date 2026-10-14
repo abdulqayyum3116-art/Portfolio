@@ -59,6 +59,12 @@ export default function Hero() {
   const spX = useSpring(pX, { stiffness: 80, damping: 20 })
   const spY = useSpring(pY, { stiffness: 80, damping: 20 })
 
+  /* b2 blob gets a slightly different parallax */
+  const b2X = useMotionValue(0)
+  const b2Y = useMotionValue(0)
+  const spB2X = useSpring(b2X, { stiffness: 60, damping: 18 })
+  const spB2Y = useSpring(b2Y, { stiffness: 60, damping: 18 })
+
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
       if (window.innerWidth < 860) return
@@ -195,8 +201,8 @@ export default function Hero() {
           style={{ x: spX, y: spY }}
         >
           <Image
-            src="/images/shah-wide.webp"
-            alt="Dr. Shahzaib Hamid presenting at a stage"
+            src="/images/shah-notebook.webp"
+            alt="Dr. Shahzaib Hamid holding a hand-drawn patient acquisition plan"
             fill
             sizes="(max-width: 860px) 60vw, 35vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
@@ -207,14 +213,16 @@ export default function Hero() {
         {/* Blob b2 — small circle, CodeSquad logo */}
         <motion.div
           className={`${styles.blob} ${styles.b2}`}
-          style={{ x: useSpring(useMotionValue(0), { stiffness: 60, damping: 18 }), y: useSpring(useMotionValue(0), { stiffness: 60, damping: 18 }) }}
+          style={{ x: spB2X, y: spB2Y }}
         >
           <span className={styles.csBadge} aria-label="CodeSquad">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-              <rect width="44" height="44" rx="12" fill="#0E9384"/>
-              <text x="22" y="30" textAnchor="middle" fill="white"
-                fontFamily="var(--font-fraunces), Georgia, serif" fontSize="18" fontWeight="800">CS</text>
-            </svg>
+            <Image
+              src="/images/codesquad-mark.png"
+              alt=""
+              width={56}
+              height={56}
+              style={{ borderRadius: 14, background: '#fff' }}
+            />
           </span>
           <small className={styles.blobLabel}>CodeSquad</small>
         </motion.div>
@@ -225,11 +233,11 @@ export default function Hero() {
           style={{ x: spX, y: spY }}
         >
           <Image
-            src="/images/shah-portrait.webp"
-            alt="Dr. Shahzaib Hamid, Founder & CEO of CodeSquad"
+            src="/images/search-tablet.webp"
+            alt="Google search open on a tablet, where patients find clinics"
             fill
             sizes="(max-width: 860px) 55vw, 32vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            style={{ objectFit: 'cover', objectPosition: '65% center' }}
           />
         </motion.div>
 
