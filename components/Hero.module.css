@@ -118,6 +118,9 @@
   background: var(--mint);
   flex-direction: column;
   gap: 4px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .b3 {

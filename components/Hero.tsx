@@ -211,11 +211,16 @@ export default function Hero() {
         </motion.div>
 
         {/* Blob b2 — small circle, CodeSquad logo */}
-        <motion.div
+        <motion.a
           className={`${styles.blob} ${styles.b2}`}
           style={{ x: spB2X, y: spB2Y }}
+          href="https://codesquad.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit CodeSquad"
+          whileHover={{ scale: 1.05 }}
         >
-          <span className={styles.csBadge} aria-label="CodeSquad">
+          <span className={styles.csBadge}>
             <Image
               src="/images/codesquad-mark.png"
               alt=""
@@ -225,7 +230,7 @@ export default function Hero() {
             />
           </span>
           <small className={styles.blobLabel}>CodeSquad</small>
-        </motion.div>
+        </motion.a>
 
         {/* Blob b3 — bottom, portrait */}
         <motion.div
