@@ -1,0 +1,83 @@
+.section {
+  padding: 90px 0;
+}
+
+.three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+  position: relative;
+}
+
+.leak {
+  padding: 30px 26px 26px;
+  position: relative;
+  border: 2px solid var(--ink);
+  background: var(--card);
+  cursor: default;
+}
+
+.card1 {
+  border-radius: 30px 30px 30px 90px;
+  background: var(--mint);
+  transform: rotate(-1.2deg);
+}
+
+.card2 {
+  border-radius: 90px 30px 30px 30px;
+  background: var(--butter);
+  transform: translateY(24px) rotate(0.8deg);
+}
+
+.card3 {
+  border-radius: 30px 90px 30px 30px;
+  background: var(--sky);
+  transform: rotate(-0.6deg);
+}
+
+.ico {
+  font-size: 34px;
+}
+
+.leak h3 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 34px;
+  margin: 6px 0 8px;
+}
+
+.leak p {
+  margin: 0 0 14px;
+  font-size: 16px;
+}
+
+.leakNote {
+  font-size: 23px;
+  color: var(--ink);
+  background: var(--bg);
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transform: rotate(-1.5deg);
+}
+
+.arrowGap {
+  position: absolute;
+  top: -26px;
+  width: 90px;
+  height: 50px;
+}
+
+@media (max-width: 860px) {
+  .three {
+    grid-template-columns: 1fr;
+  }
+
+  .card1, .card2, .card3 {
+    transform: none;
+  }
+
+  .arrowGap {
+    display: none;
+  }
+}

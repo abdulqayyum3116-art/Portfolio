@@ -1,0 +1,38 @@
+.signal {
+  background: var(--ink);
+  color: #FFF4E8;
+  border-radius: 48px;
+  padding: 60px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+}
+
+.heading {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(32px, 4.4vw, 52px);
+  margin: 14px 0 20px;
+  color: #FFF4E8;
+  line-height: 1.08;
+}
+
+.body {
+  color: #CFCFE8;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sigsvg {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 860px) {
+  .signal {
+    grid-template-columns: 1fr;
+    padding: 40px 24px;
+    border-radius: 32px;
+  }
+}

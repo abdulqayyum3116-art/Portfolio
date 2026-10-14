@@ -1,0 +1,77 @@
+.logosOuter {
+  border-top: 1.5px dashed var(--line);
+  border-bottom: 1.5px dashed var(--line);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.label {
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+.logosInner {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 56px;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  align-items: center;
+}
+
+.logosOuter:hover .track {
+  animation-play-state: paused;
+}
+
+.logoItem {
+  white-space: nowrap;
+  padding: 4px 0;
+}
+
+/* Followers */
+.follow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 34px 0 0;
+}
+
+.f {
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  border-radius: 20px;
+  padding: 12px 22px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.f b {
+  font: 800 34px var(--font-fraunces), Georgia, serif;
+  min-width: 3.5ch;
+}
+
+.f span {
+  color: var(--mute);
+  font-size: 14px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; }
+}

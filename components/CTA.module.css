@@ -1,0 +1,48 @@
+.cta {
+  text-align: center;
+  background: linear-gradient(160deg, var(--butter), #FFD3C0, var(--butter));
+  background-size: 300% 300%;
+  color: #1B1B3A;
+  border-radius: 56px;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  animation: gradientShift 8s ease infinite;
+}
+
+.heading {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 12px 0 0;
+  color: #1B1B3A;
+}
+
+.body {
+  max-width: 520px;
+  margin: 20px auto 30px;
+  color: rgba(27, 27, 58, 0.75);
+  font-size: 18px;
+}
+
+.ctaBtn {
+  background: #1B1B3A;
+  color: #FFF4E8;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 860px) {
+  .cta {
+    border-radius: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta { animation: none; }
+}

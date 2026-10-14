@@ -1,0 +1,59 @@
+.spark {
+  animation: spark 2.4s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.wavyUnderline {
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+  width: 100%;
+  height: 18px;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.wavyUnderline.drawn {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.drawArrow {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+}
+
+.drawArrow path,
+.drawArrow circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.dottedArrow {
+  position: absolute;
+  top: -26px;
+  width: 90px;
+  height: 50px;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+@keyframes spark {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50%       { transform: scale(1.25) rotate(8deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark, .pulse { animation: none; }
+  .wavyUnderline { stroke-dashoffset: 0; }
+  .drawArrow path, .drawArrow circle { stroke-dashoffset: 0; }
+}
