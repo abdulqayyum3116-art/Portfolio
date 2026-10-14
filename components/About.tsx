@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
 import Image from 'next/image'
 import styles from './About.module.css'
 import { PlusSign } from './Doodles'
@@ -29,7 +29,7 @@ const beliefs = [
   },
 ]
 
-const beliefVariants = {
+const beliefVariants: Variants = {
   hidden: { opacity: 0, y: 32, rotate: 0 },
   visible: (i: number) => ({
     opacity: 1,

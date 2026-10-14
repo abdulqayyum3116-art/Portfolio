@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
 import styles from './LeakCards.module.css'
 
 const cards = [
@@ -28,7 +28,7 @@ const cards = [
   },
 ]
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 48, rotate: 0 },
   visible: (i: number) => ({
     opacity: 1,
@@ -42,7 +42,7 @@ const cardVariants = {
   }),
 }
 
-const arrowVariants = {
+const arrowVariants: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: {
     pathLength: 1,

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, type Variants } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './Hero.module.css'
@@ -11,12 +11,12 @@ const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? '#call'
 /* Headline words for stagger */
 const words1 = ['I', 'help', 'US', 'clinics', 'get']
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 }
 
-const wordVariants = {
+const wordVariants: Variants = {
   hidden: { opacity: 0, y: 24, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
@@ -26,7 +26,7 @@ const wordVariants = {
   },
 }
 
-const stickerVariants = {
+const stickerVariants: Variants = {
   hidden: { scale: 0, opacity: 0, rotate: 6 },
   visible: (i: number) => ({
     scale: 1,
@@ -36,7 +36,7 @@ const stickerVariants = {
   }),
 }
 
-const heroVariants = {
+const heroVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut', delay: 0.15 } },
 }

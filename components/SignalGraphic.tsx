@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
 import styles from './SignalGraphic.module.css'
 
 const fadeIn = (delay = 0) => ({
@@ -9,7 +9,7 @@ const fadeIn = (delay = 0) => ({
   visible: { opacity: 1, transition: { duration: 0.7, delay } },
 })
 
-const drawPath = {
+const drawPath: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: {
     pathLength: 1,
@@ -18,7 +18,7 @@ const drawPath = {
   },
 }
 
-const popIn = {
+const popIn: Variants = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,
