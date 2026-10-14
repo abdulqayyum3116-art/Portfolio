@@ -68,14 +68,15 @@ export function ECGPulse({ color = '#F06C9B', className = '', style }: ECGProps)
 interface WavyProps {
   color?: string
   className?: string
+  drawn?: boolean
 }
 
-export function WavyUnderline({ color = '#0E9384', className = '' }: WavyProps) {
+export function WavyUnderline({ color = '#0E9384', className = '', drawn = false }: WavyProps) {
   return (
     <svg
       viewBox="0 0 200 18"
       preserveAspectRatio="none"
-      className={`${styles.wavyUnderline} ${className}`}
+      className={`${styles.wavyUnderline} ${drawn ? styles.drawn : ''} ${className}`}
       fill="none"
       stroke={color}
       strokeWidth="5"
@@ -112,8 +113,8 @@ export function CurvedArrow({ className = '', style, variant = 'up' }: ArrowProp
         strokeLinecap="round"
         aria-hidden="true"
       >
-        <path pathLength="1" d="M190 60 C 120 10, 60 110, 12 52" />
-        <path pathLength="1" d="M12 52 L 32 38 M12 52 L 34 66" />
+        <path pathLength="1" d="M190 50 C 140 10, 90 60, 14 60" />
+        <path pathLength="1" d="M14 60 L 34 46 M14 60 L 34 74" />
       </svg>
     )
   }

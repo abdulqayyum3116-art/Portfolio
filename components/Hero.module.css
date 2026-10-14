@@ -43,19 +43,6 @@
   display: inline-block;
 }
 
-/* Wavy underline states */
-.underlineHidden {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: none;
-}
-
-.underlineDrawn {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1s ease 0s;
-}
-
 .lead {
   font-size: 19px;
   color: var(--mute);

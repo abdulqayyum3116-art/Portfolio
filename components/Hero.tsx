@@ -134,7 +134,7 @@ export default function Hero() {
               variants={wordVariants}
             >
               found,
-              <WavyUnderline className={underlineDrawn ? styles.underlineDrawn : styles.underlineHidden} />
+              <WavyUnderline drawn={underlineDrawn} />
             </motion.em>{' '}
             <motion.span variants={wordVariants} className={styles.word}>chosen,</motion.span>{' '}
             <motion.span variants={wordVariants} className={styles.word}>and</motion.span>{' '}
