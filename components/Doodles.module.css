@@ -32,6 +32,11 @@
 .drawArrow circle {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
+  animation: drawStroke 1.2s ease 1s forwards;
+}
+
+@keyframes drawStroke {
+  to { stroke-dashoffset: 0; }
 }
 
 .dottedArrow {
@@ -55,5 +60,5 @@
 @media (prefers-reduced-motion: reduce) {
   .spark, .pulse { animation: none; }
   .wavyUnderline { stroke-dashoffset: 0; }
-  .drawArrow path, .drawArrow circle { stroke-dashoffset: 0; }
+  .drawArrow path, .drawArrow circle { stroke-dashoffset: 0; animation: none; }
 }
