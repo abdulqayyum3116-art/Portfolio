@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Shahzaib Hamid</title>
+  <path fill="#1B1B3A" d="M32 0a32 32 0 0 1 0 64H8a8 8 0 0 1-8-8V32A32 32 0 0 1 32 0Z"/>
+  <g fill="none" stroke="#FFFBF5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M27 22H18a5 5 0 0 0 0 10h5a5 5 0 0 1 0 10H13"/>
+    <path d="M37 22v20m14-20v20M37 32h14"/>
+  </g>
+</svg>
