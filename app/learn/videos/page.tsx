@@ -8,12 +8,12 @@ import { siteUrl } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Videos · Learning Hub · Dr. Shahzaib Hamid',
-  description: 'YouTube deep dives on clinic growth: SEO, AEO, Google Ads, Meta Ads and faster bookings.',
+  description: 'YouTube deep dives on AI, software development, clinic growth, SEO and marketing.',
   openGraph: {
-    type: 'website', title: 'Videos ? Learning Hub', description: 'Video walkthroughs on SEO, ads and clinic growth.',
+    type: 'website', title: 'Videos - Learning Hub', description: 'Video walkthroughs on AI, coding, SEO and clinic growth.',
     url: `${siteUrl}/learn/videos/`, images: ['/og-image.jpg'],
   },
-  twitter: { card: 'summary_large_image', title: 'Videos ? Learning Hub', description: 'Video walkthroughs on SEO, ads and clinic growth.', images: ['/og-image.jpg'] },
+  twitter: { card: 'summary_large_image', title: 'Videos - Learning Hub', description: 'Video walkthroughs on AI, coding, SEO and clinic growth.', images: ['/og-image.jpg'] },
   alternates: { canonical: `${siteUrl}/learn/videos/` },
 }
 
@@ -30,7 +30,7 @@ export default async function VideosPage() {
         crumbs={[{ href: '/learn/', label: 'Learning Hub' }]}
         eyebrow="press play"
         title="Videos"
-        sub="Walkthroughs, teardowns and strategy breakdowns. Grab a coffee."
+        sub="Explore AI tutorials, coding walkthroughs and clinic growth strategies from my YouTube channel."
       />
       <section className={styles.section}>
         <HubTabs videos={videos} showKindTabs={false} emptyText="No videos yet — subscribe on YouTube to catch the first one." />

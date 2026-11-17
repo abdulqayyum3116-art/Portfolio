@@ -1,3 +1,5 @@
+import { channelVideos } from './channel-videos'
+
 /**
  * Hand-curated YouTube videos & Shorts for the Learning Hub.
  *
@@ -21,6 +23,7 @@ export type LearnVideo = {
   topic: string
   /** Optional ISO date, e.g. "2026-10-01" */
   publishedAt?: string
+  durationSeconds?: number
   description?: string
 }
 
@@ -33,6 +36,7 @@ export const hiddenVideoIds = new Set<string>([
 ])
 
 export const videos: LearnVideo[] = [
+  ...channelVideos,
   // ── Shorts (imported from shahzaib-hamid-shorts.csv, channel order) ──
   { id: "DdyLHoHYd3M", kind: 'short', topic: "AI Automation", title: "AI Won't Replace Everyone, But It Will Change How We Work" },
   { id: "PiBsNJiodIk", kind: 'short', topic: "AI Automation", title: "Is AI Going to Take Your Job? The Future of Work" },

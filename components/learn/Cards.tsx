@@ -53,7 +53,11 @@ export function VideoCard({ video }: { video: LearnVideo }) {
         <span className={styles.kind}>Video · {video.topic}</span>
         <h3 className={styles.cardTitle}>{video.title}</h3>
         {video.description && <p className={styles.excerpt}>{video.description}</p>}
-        {video.publishedAt && <span className={styles.meta}>{fmt(video.publishedAt)}</span>}
+        {(video.publishedAt || video.durationSeconds) && <span className={styles.meta}>
+          {video.publishedAt && fmt(video.publishedAt)}
+          {video.publishedAt && video.durationSeconds ? ' | ' : ''}
+          {video.durationSeconds ? `${Math.floor(video.durationSeconds / 60)}:${String(video.durationSeconds % 60).padStart(2, '0')}` : ''}
+        </span>}
       </div>
     </article>
   )

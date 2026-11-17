@@ -16,7 +16,7 @@ export async function getAllVideos(): Promise<LearnVideo[]> {
   const seen = new Set(list.map((v) => v.id))
 
   for (const p of await getAllPosts()) {
-    if (!p.youtubeId || seen.has(p.youtubeId)) continue
+    if (!p.youtubeId || !isValidId(p.youtubeId) || hiddenVideoIds.has(p.youtubeId) || seen.has(p.youtubeId)) continue
     seen.add(p.youtubeId)
     list.push({
       id: p.youtubeId,
@@ -67,6 +67,7 @@ export function videoJsonLd(list: LearnVideo[]) {
     description: v.description ?? v.title,
     thumbnailUrl: thumbnailUrl(v),
     ...(v.publishedAt ? { uploadDate: v.publishedAt } : {}),
+    ...(v.durationSeconds ? { duration: `PT${v.durationSeconds}S` } : {}),
     embedUrl: embedUrl(v.id),
     contentUrl: watchUrl(v),
   }))

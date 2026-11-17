@@ -166,3 +166,9 @@ Fonts: **Fraunces** (variable, soft/wonky), **Caveat** (handwritten), **DM Sans*
 After `npm run build`, run `node tests/site-check.mjs` to check content sanitization, Markdown formatting, archive filters/pagination, mobile menu interactions, CMS configuration and exported metadata.
 
 The shared preview image is `public/og-image.jpg`; its editable vector source is `public/images/social-card.svg` (1200 ? 630). Regenerate the JPEG after changing the source.
+
+## Channel video library
+
+`content/channel-videos.ts` contains all 78 public uploads found on the channel Videos tab on 2026-11-17, including older coding and AI tutorials. YouTube determines the format: regular uploads remain Videos even when shorter than three minutes. Shorts remain in `content/videos.ts`.
+
+Imported entries include original titles, upload timestamps, durations and short description excerpts. Topics are editorial labels. All 78 uploads reported embeddable at import time. Entries merge with blog-linked videos by YouTube ID; the explicit hidden-ID list remains enforced. This is a snapshot, not automatic synchronization. Add future uploads to `content/channel-videos.ts` and rebuild.

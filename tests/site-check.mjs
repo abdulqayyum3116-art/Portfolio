@@ -97,3 +97,28 @@ button('Menu').props.onClick(); renderNav();
 walk(tree).find(n=>n.props.id==='test').props.onClick({target:{closest:()=>({})}}); renderNav(); assert.equal(button('Menu').props['aria-expanded'],false)
 walk(tree).find(n=>n.props.onMouseMove).props.onMouseMove({})
 console.log('PASS: mobile menu toggle, Escape focus return, link dismissal and reduced-motion guard')
+
+const channel = load('content/channel-videos.ts')
+const catalog = load('content/videos.ts', { './channel-videos': channel })
+assert.equal(channel.channelVideos.length, 78)
+assert.equal(new Set(catalog.videos.map(v => v.id)).size, catalog.videos.length)
+for (const video of channel.channelVideos) {
+  assert.match(video.id, /^[\w-]{11}$/)
+  assert.equal(video.kind, 'video')
+  assert.ok(Number.isFinite(Date.parse(video.publishedAt)))
+  assert.ok(video.durationSeconds > 0)
+  assert.ok(!catalog.hiddenVideoIds.has(video.id))
+}
+const videoLibrary = load('lib/videos.ts', {
+  '@/content/videos': catalog,
+  './blog': { getAllPosts: async () => [
+    {youtubeId:channel.channelVideos[0].id, title:'Duplicate from blog', tags:['General']},
+    {youtubeId:'mhvPJDXl5zs', title:'Hidden', tags:[]},
+  ] },
+})
+assert.equal((await videoLibrary.getVideos()).length, 78)
+assert.equal((await videoLibrary.getShorts()).length, 64)
+assert.equal((await videoLibrary.getVideos())[0].id, channel.channelVideos[0].id)
+const exportedVideos = fs.readFileSync('out/learn/videos/index.html', 'utf8')
+for (const video of channel.channelVideos) assert.ok(exportedVideos.includes(video.id), `Missing imported video ${video.id}`)
+console.log('PASS: complete 78-video import, unique IDs, upload dates, durations, hidden IDs and blog deduplication')
