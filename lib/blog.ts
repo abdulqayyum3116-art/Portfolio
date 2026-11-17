@@ -143,13 +143,17 @@ let cache: Promise<BlogPost[]> | null = null
 
 async function fetchPosts(): Promise<BlogPost[]> {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('[blog] Production builds require SUPABASE_URL and SUPABASE_ANON_KEY.')
+    }
     console.warn('[blog] Supabase URL / anon key not set — building Learning Hub without blog posts.')
     return []
   }
 
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=*`, {
     headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
-    cache: 'force-cache',
+    // Default fetch is fresh during each static build; the promise below deduplicates within the worker.
+    signal: AbortSignal.timeout(30000),
   })
 
   if (!res.ok) {

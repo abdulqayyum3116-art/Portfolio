@@ -9,6 +9,11 @@ import { siteUrl } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Shorts · Learning Hub · Dr. Shahzaib Hamid',
   description: '60-second tips on getting more patients from Google, AI search and social ads.',
+  openGraph: {
+    type: 'website', title: 'Reels ? Learning Hub', description: 'Quick tips on getting more patients from search and social media.',
+    url: `${siteUrl}/learn/shorts/`, images: ['/og-image.jpg'],
+  },
+  twitter: { card: 'summary_large_image', title: 'Reels ? Learning Hub', description: 'Quick tips on getting more patients from search and social media.', images: ['/og-image.jpg'] },
   alternates: { canonical: `${siteUrl}/learn/shorts/` },
 }
 

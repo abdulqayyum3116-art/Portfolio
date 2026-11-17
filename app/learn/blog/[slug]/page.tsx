@@ -6,7 +6,7 @@ import { VideoCard } from '@/components/learn/Cards'
 import YouTubeEmbed from '@/components/learn/YouTubeEmbed'
 import styles from '@/components/learn/Learn.module.css'
 import { formatDate, getAllPosts, getPostBySlug } from '@/lib/blog'
-import { markdownToHtml } from '@/lib/markdown'
+import { markdownToHtml, sanitizeContent } from '@/lib/markdown'
 import { getRelatedVideos } from '@/lib/videos'
 import { jsonLdScript } from '@/lib/learn'
 import { siteUrl } from '@/lib/site'
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
-  const html = post.contentFormat === 'html' ? post.content : markdownToHtml(post.content)
+  const html = post.contentFormat === 'html' ? sanitizeContent(post.content) : markdownToHtml(post.content)
   const related = await getRelatedVideos(post.tags, 2, post.youtubeId)
   const url = `${siteUrl}/learn/blog/${post.slug}/`
 
@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
           )
         )}
 
-        {/* Content comes from our own Supabase CMS (trusted). Markdown is escaped by markdownToHtml. */}
+        {/* Both CMS HTML and parsed Markdown are sanitized before rendering. */}
         <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
 
         {post.tags.length > 0 && (

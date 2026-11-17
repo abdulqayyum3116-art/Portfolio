@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     'Free playbooks on getting clinics Found, Chosen and Booked — blogs, YouTube videos and Shorts on medical SEO, AEO, Google Ads and Meta Ads.',
   alternates: { canonical: `${siteUrl}/learn/` },
+  twitter: { card: 'summary_large_image', title: 'Learning Hub ? Dr. Shahzaib Hamid', description: 'Free reads, videos and reels for clinic growth.', images: ['/og-image.jpg'] },
   openGraph: {
     title: 'Learning Hub · Dr. Shahzaib Hamid',
     description: 'Blogs, videos and Shorts on growing a clinic: SEO, AEO, Google Ads and Meta Ads.',

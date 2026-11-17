@@ -1,17 +1,19 @@
 'use client'
 
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import styles from './Ways.module.css'
 
 import { bookingUrl } from '@/lib/booking'
 
 function MagneticBtn({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+  const reducedMotion = useReducedMotion()
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const sx = useSpring(x, { stiffness: 300, damping: 20 })
   const sy = useSpring(y, { stiffness: 300, damping: 20 })
 
   function onMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (reducedMotion) return
     const r = e.currentTarget.getBoundingClientRect()
     x.set((e.clientX - r.left - r.width / 2) * 0.3)
     y.set((e.clientY - r.top - r.height / 2) * 0.3)
@@ -21,7 +23,7 @@ function MagneticBtn({ href, children, className }: { href: string; children: Re
     <motion.a
       href={href}
       className={className ?? 'btn'}
-      style={{ x: sx, y: sy }}
+      style={{ x: reducedMotion ? 0 : sx, y: reducedMotion ? 0 : sy }}
       onMouseMove={onMove}
       onMouseLeave={() => { x.set(0); y.set(0) }}
       whileTap={{ scale: 0.96 }}

@@ -72,8 +72,15 @@
   box-shadow: 3px 3px 0 var(--coral) !important;
 }
 
-@media (max-width: 760px) {
-  .navLink {
-    display: none;
-  }
+.menuToggle { display: none; }
+@media (max-width: 960px) {
+  .nav { flex-wrap: wrap; gap: 12px; background: var(--bg); }
+  .logo { font-size: 18px; }
+  .logo b { flex-shrink: 0; }
+  .menuToggle { display: block; min-height: 44px; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; cursor: pointer; }
+  .menuToggle:focus-visible { outline: 3px solid var(--lav); outline-offset: 4px; }
+  .links { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px 0 4px; }
+  .linksOpen { display: flex; }
+  .navLink { display: block; padding: 10px 8px; min-height: 44px; }
+  .callBtn { margin-top: 8px; text-align: center; }
 }

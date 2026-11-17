@@ -1,13 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useState, useEffect, useRef, useId } from 'react'
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import styles from './Nav.module.css'
 
 import { bookingUrl } from '@/lib/booking'
 
 export default function Nav() {
+  const [open, setOpen] = useState(false)
+  const toggle = useRef<HTMLButtonElement>(null)
+  const menuId = useId()
+  const reducedMotion = useReducedMotion()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -23,6 +27,7 @@ export default function Nav() {
   const springY = useSpring(y, { stiffness: 300, damping: 20 })
 
   function handleMagnet(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (reducedMotion) return
     const rect = e.currentTarget.getBoundingClientRect()
     const cx = rect.left + rect.width / 2
     const cy = rect.top + rect.height / 2
@@ -37,6 +42,13 @@ export default function Nav() {
 
   return (
     <motion.nav
+      aria-label="Main navigation"
+      onKeyDown={event => {
+        if (event.key === 'Escape' && open) { setOpen(false); toggle.current?.focus() }
+      }}
+      onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false)
+      }}
       className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
@@ -47,7 +59,13 @@ export default function Nav() {
         <span>Shahzaib Hamid</span>
       </Link>
 
-      <div className={styles.links}>
+      <button ref={toggle} type="button" className={styles.menuToggle}
+        aria-expanded={open} aria-controls={menuId} onClick={() => setOpen(!open)}>
+        {open ? 'Close' : 'Menu'}
+      </button>
+      <div id={menuId} className={`${styles.links} ${open ? styles.linksOpen : ''}`}
+        onClick={event => { if ((event.target as HTMLElement).closest('a')) setOpen(false) }}>
+
         <Link href="/#system" className={styles.navLink}>The system</Link>
         <Link href="/#about" className={styles.navLink}>About</Link>
         <Link href="/learn/" className={styles.navLink}>Learn</Link>
@@ -62,7 +80,7 @@ export default function Nav() {
         <motion.a
           href={bookingUrl}
           className={`btn ${styles.callBtn}`}
-          style={{ x: springX, y: springY }}
+          style={{ x: reducedMotion ? 0 : springX, y: reducedMotion ? 0 : springY }}
           onMouseMove={handleMagnet}
           onMouseLeave={resetMagnet}
           whileTap={{ scale: 0.96 }}

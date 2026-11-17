@@ -9,6 +9,11 @@ import { siteUrl } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Videos · Learning Hub · Dr. Shahzaib Hamid',
   description: 'YouTube deep dives on clinic growth: SEO, AEO, Google Ads, Meta Ads and faster bookings.',
+  openGraph: {
+    type: 'website', title: 'Videos ? Learning Hub', description: 'Video walkthroughs on SEO, ads and clinic growth.',
+    url: `${siteUrl}/learn/videos/`, images: ['/og-image.jpg'],
+  },
+  twitter: { card: 'summary_large_image', title: 'Videos ? Learning Hub', description: 'Video walkthroughs on SEO, ads and clinic growth.', images: ['/og-image.jpg'] },
   alternates: { canonical: `${siteUrl}/learn/videos/` },
 }
 

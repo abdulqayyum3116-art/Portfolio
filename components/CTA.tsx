@@ -1,18 +1,20 @@
 'use client'
 
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import styles from './CTA.module.css'
 import { PlusSign } from './Doodles'
 
 import { bookingUrl } from '@/lib/booking'
 
 export default function CTA() {
+  const reducedMotion = useReducedMotion()
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const sx = useSpring(x, { stiffness: 300, damping: 20 })
   const sy = useSpring(y, { stiffness: 300, damping: 20 })
 
   function magnet(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (reducedMotion) return
     const r = e.currentTarget.getBoundingClientRect()
     x.set((e.clientX - r.left - r.width / 2) * 0.3)
     y.set((e.clientY - r.top - r.height / 2) * 0.3)
@@ -49,14 +51,14 @@ export default function CTA() {
         </span>
         <h2 className={styles.heading}>Let&apos;s find your leak.</h2>
         <p className={styles.body}>
-          In 20 minutes I&apos;ll walk through your Google presence, website and response time,
+          In 30 minutes I&apos;ll walk through your Google presence, website and response time,
           and show you the three fixes that would book the most patients. You keep the
           roadmap either way.
         </p>
         <motion.a
           href={bookingUrl}
           className={`btn ${styles.ctaBtn}`}
-          style={{ x: sx, y: sy, position: 'relative' }}
+          style={{ x: reducedMotion ? 0 : sx, y: reducedMotion ? 0 : sy, position: 'relative' }}
           onMouseMove={magnet}
           onMouseLeave={() => { x.set(0); y.set(0) }}
           whileTap={{ scale: 0.96 }}

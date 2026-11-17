@@ -1,12 +1,13 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useInView, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import styles from './LogosStrip.module.css'
 
 const logos = ['Harmony MedSpa', 'Dr. Thad', 'CareInn', 'Harmony MedSpa', 'Dr. Thad', 'CareInn']
 
 function CountUp({ target }: { target: number }) {
+  const reducedMotion = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const count = useMotionValue(0)
@@ -14,9 +15,9 @@ function CountUp({ target }: { target: number }) {
   const [display, setDisplay] = useState('0')
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView || reducedMotion) return
     count.set(target)
-  }, [inView, count, target])
+  }, [inView, count, target, reducedMotion])
 
   useEffect(() => {
     return springCount.on('change', (v) => {
@@ -25,7 +26,7 @@ function CountUp({ target }: { target: number }) {
     })
   }, [springCount])
 
-  return <b ref={ref}>{display}</b>
+  return <b ref={ref}>{reducedMotion ? (target >= 1000 ? `${Math.round(target / 1000)}K+` : String(target)) : display}</b>
 }
 
 export default function LogosStrip() {
@@ -36,7 +37,7 @@ export default function LogosStrip() {
         <div className={styles.logosInner}>
           <div className={styles.track}>
             {[...logos, ...logos].map((name, i) => (
-              <span key={i} className={styles.logoItem}>{name}</span>
+              <span key={i} aria-hidden={i >= 3 ? true : undefined} className={styles.logoItem}>{name}</span>
             ))}
           </div>
         </div>

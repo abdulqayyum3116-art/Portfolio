@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, type Variants } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useReducedMotion, type Variants } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './Hero.module.css'
@@ -42,15 +42,17 @@ const heroVariants: Variants = {
 }
 
 export default function Hero() {
+  const reducedMotion = useReducedMotion()
   const [underlineDrawn, setUnderlineDrawn] = useState(false)
   const [arrowsDrawn, setArrowsDrawn] = useState(false)
 
   /* Kick off draw sequence */
   useEffect(() => {
+    if (reducedMotion) { setUnderlineDrawn(true); setArrowsDrawn(true); return }
     const t1 = setTimeout(() => setUnderlineDrawn(true), 700)
     const t2 = setTimeout(() => setArrowsDrawn(true), 1000)
     return () => { clearTimeout(t1); clearTimeout(t2) }
-  }, [])
+  }, [reducedMotion])
 
   /* Collage parallax on mouse move (desktop) */
   const collageRef = useRef<HTMLDivElement>(null)
@@ -67,7 +69,7 @@ export default function Hero() {
 
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
-      if (window.innerWidth < 860) return
+      if (reducedMotion || window.innerWidth < 860) return
       const el = collageRef.current
       if (!el) return
       const rect = el.getBoundingClientRect()
@@ -78,7 +80,7 @@ export default function Hero() {
     }
     window.addEventListener('mousemove', handleMove)
     return () => window.removeEventListener('mousemove', handleMove)
-  }, [pX, pY])
+  }, [pX, pY, reducedMotion])
 
   /* Magnetic on buttons */
   const bx = useMotionValue(0); const by = useMotionValue(0)
@@ -86,6 +88,7 @@ export default function Hero() {
   const sby = useSpring(by, { stiffness: 300, damping: 18 })
 
   function magnet(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (reducedMotion) return
     const r = e.currentTarget.getBoundingClientRect()
     bx.set((e.clientX - r.left - r.width / 2) * 0.3)
     by.set((e.clientY - r.top - r.height / 2) * 0.3)
@@ -162,7 +165,7 @@ export default function Hero() {
           <motion.a
             href={bookingUrl}
             className="btn"
-            style={{ x: sbx, y: sby }}
+            style={{ x: reducedMotion ? 0 : sbx, y: reducedMotion ? 0 : sby }}
             onMouseMove={magnet}
             onMouseLeave={() => { bx.set(0); by.set(0) }}
             whileTap={{ scale: 0.96 }}
@@ -185,7 +188,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1 }}
         >
-          <span className={`hand ${styles.noteText}`}>20 mins, free, no pitch deck</span>
+          <span className={`hand ${styles.noteText}`}>30 mins, free, no pitch deck</span>
         </motion.div>
       </motion.div>
 
@@ -198,7 +201,7 @@ export default function Hero() {
         {/* Blob b1 — large top, stage photo */}
         <motion.div
           className={`${styles.blob} ${styles.b1}`}
-          style={{ x: spX, y: spY }}
+          style={{ x: reducedMotion ? 0 : spX, y: reducedMotion ? 0 : spY }}
         >
           <Image
             src="/images/shah-headshot.webp"
@@ -213,7 +216,7 @@ export default function Hero() {
         {/* Blob b2 — small circle, CodeSquad logo */}
         <motion.a
           className={`${styles.blob} ${styles.b2}`}
-          style={{ x: spB2X, y: spB2Y }}
+          style={{ x: reducedMotion ? 0 : spB2X, y: reducedMotion ? 0 : spB2Y }}
           href="https://codesquad.ai"
           target="_blank"
           rel="noopener noreferrer"
@@ -235,7 +238,7 @@ export default function Hero() {
         {/* Blob b3 — bottom, portrait */}
         <motion.div
           className={`${styles.blob} ${styles.b3}`}
-          style={{ x: spX, y: spY }}
+          style={{ x: reducedMotion ? 0 : spX, y: reducedMotion ? 0 : spY }}
         >
           <Image
             src="/images/search-tablet.webp"

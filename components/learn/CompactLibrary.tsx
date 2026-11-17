@@ -12,7 +12,7 @@ const formats: { value: Kind; label: string }[] = [
 ]
 const PAGE_SIZE = 6
 
-export default function CompactLibrary({ posts, videos }: { posts: BlogSummary[]; videos: LearnVideo[] }) {
+export default function CompactLibrary({ posts, videos, showKindTabs = true, emptyText }: { posts: BlogSummary[]; videos: LearnVideo[]; showKindTabs?: boolean; emptyText?: string }) {
   const [kind, setKind] = useState<Kind>('all')
   const [topic, setTopic] = useState('')
   const [query, setQuery] = useState('')
@@ -64,11 +64,11 @@ export default function CompactLibrary({ posts, videos }: { posts: BlogSummary[]
             </select>
           </label>
         </div>
-        <div className={styles.libraryFormats} role="group" aria-label="Content format">
+        {showKindTabs && <div className={styles.libraryFormats} role="group" aria-label="Content format">
           {formats.map(format => <button key={format.value} type="button" aria-pressed={kind === format.value}
             className={`${styles.tab} ${kind === format.value ? styles.tabActive : ''}`}
             onClick={() => { setKind(format.value); setTopic(''); setPage(1) }}>{format.label}</button>)}
-        </div>
+        </div>}
       </div>
       <div className={styles.libraryResults}>
         <div>
@@ -83,7 +83,7 @@ export default function CompactLibrary({ posts, videos }: { posts: BlogSummary[]
         </div>)}
       </div> : <div className={styles.libraryEmpty}>
         <h3>{filtered ? 'No matching resources' : 'New lessons are on the way'}</h3>
-        <p>{filtered ? 'Try a different keyword or clear your filters to explore the library.' : 'Check back soon for practical clinic growth resources.'}</p>
+        <p>{filtered ? 'Try a different keyword or clear your filters to explore the library.' : (emptyText ?? 'Check back soon for practical clinic growth resources.')}</p>
       </div>}
       {pages > 1 && <nav className={styles.libraryPagination} aria-label="Resource pages">
         <button type="button" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>Previous</button>
