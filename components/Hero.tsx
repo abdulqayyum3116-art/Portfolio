@@ -6,7 +6,7 @@ import Image from 'next/image'
 import styles from './Hero.module.css'
 import { PlusSign, ECGPulse, WavyUnderline, CurvedArrow } from './Doodles'
 
-const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? '#call'
+import { bookingUrl } from '@/lib/booking'
 
 /* Headline words for stagger */
 const words1 = ['I', 'help', 'US', 'clinics', 'get']

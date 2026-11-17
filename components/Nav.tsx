@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import styles from './Nav.module.css'
 
-const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? '#call'
+import { bookingUrl } from '@/lib/booking'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -48,8 +48,9 @@ export default function Nav() {
       </Link>
 
       <div className={styles.links}>
-        <a href="#system" className={styles.navLink}>The system</a>
-        <a href="#about" className={styles.navLink}>About</a>
+        <Link href="/#system" className={styles.navLink}>The system</Link>
+        <Link href="/#about" className={styles.navLink}>About</Link>
+        <Link href="/learn/" className={styles.navLink}>Learn</Link>
         <a
           href="https://codesquad.ai"
           target="_blank"

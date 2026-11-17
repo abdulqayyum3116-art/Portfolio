@@ -17,3 +17,8 @@
 .link:hover {
   color: var(--ink);
 }
+
+.links {
+  display: flex;
+  gap: 20px;
+}

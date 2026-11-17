@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import styles from './CTA.module.css'
 import { PlusSign } from './Doodles'
 
-const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? '#call'
+import { bookingUrl } from '@/lib/booking'
 
 export default function CTA() {
   const x = useMotionValue(0)

@@ -37,6 +37,9 @@ Create a `.env.local` file (already included with placeholders):
 |---|---|
 | `NEXT_PUBLIC_BOOKING_URL` | Calendly / Cal.com link for all "Book a Roadmap Call" buttons |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for SEO meta tags and sitemap |
+| `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) | Supabase project URL — blog posts for the Learning Hub are read from here **at build time** |
+| `SUPABASE_ANON_KEY` (or `NEXT_PUBLIC_SUPABASE_ANON_KEY`) | Supabase anon key (RLS must allow `select` on published posts) |
+| `SUPABASE_POSTS_TABLE` | Optional — table name, defaults to `posts` |
 
 Example:
 ```
@@ -79,6 +82,36 @@ All "Book a Roadmap Call" buttons read from the `NEXT_PUBLIC_BOOKING_URL` env va
    NEXT_PUBLIC_BOOKING_URL=https://your-calendly-or-cal-link
    ```
 3. Restart the dev server or redeploy.
+
+---
+
+## Learning Hub (`/learn`)
+
+Blogs, YouTube videos and Shorts in one place:
+
+| Route | Source |
+|---|---|
+| `/learn/` | Hub: featured items, Shorts rail, filterable grid of everything |
+| `/learn/blog/` and `/learn/blog/[slug]/` | Supabase table (`SUPABASE_POSTS_TABLE`, default `posts`) |
+| `/learn/videos/` | `content/videos.ts` entries with `kind: 'video'` |
+| `/learn/shorts/` | `content/videos.ts` entries with `kind: 'short'` |
+
+### Blog posts (Supabase)
+
+`lib/blog.ts` fetches the table through Supabase's REST API during `next build`. `mapRow()` accepts common column
+names (`title`, `slug`, `content`/`body`, `excerpt`/`summary`, `cover_image`, `tags`, `published_at`, `status`, …);
+edit it if your schema differs. Rows with `status != 'published'`, `published = false` or `draft = true` are skipped.
+A post's `youtube` link is embedded at the top of the post and added to `/learn/videos/` automatically.
+Bodies starting with `<` render as HTML; anything else renders as Markdown (`lib/markdown.ts`).
+
+**Publishing a new blog post:** because the site is a static export, a new post goes live on the next build.
+Automate this with a Supabase **Database Webhook** (on INSERT/UPDATE of the posts table) that POSTs to your
+Vercel/Netlify **deploy hook** URL.
+
+### Adding a video or Short
+
+Append an entry to `content/videos.ts`: paste the YouTube ID (after `v=` or `/shorts/`), title, `kind`, `topic`
+and `publishedAt`. Players are click-to-load (`youtube-nocookie.com`), so pages stay fast.
 
 ---
 

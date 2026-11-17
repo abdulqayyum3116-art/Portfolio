@@ -1,0 +1,115 @@
+.section {
+  padding: 20px 0 50px;
+}
+
+.heading {
+  font-size: clamp(28px, 3.6vw, 40px);
+  margin-bottom: 32px;
+}
+
+.heading :global(.hand) {
+  font-size: 0.7em;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px 26px;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 280px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--lav);
+  outline-offset: 4px;
+}
+
+.card1 {
+  border-radius: 30px 30px 30px 90px;
+  background: var(--mint);
+}
+
+.card2 {
+  border-radius: 90px 30px 30px 30px;
+  background: var(--butter);
+}
+
+.card3 {
+  border-radius: 30px 90px 30px 30px;
+  background: var(--sky);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.ico {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  font-size: 28px;
+}
+
+.note {
+  font-size: 22px;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 4px 12px;
+  border-radius: 12px;
+  transform: rotate(-2deg);
+}
+
+.title {
+  font-size: 36px;
+  margin: 18px 0 8px;
+}
+
+.body {
+  margin: 0 0 20px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.cta {
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.card:hover .arrow {
+  transform: translateX(6px);
+}
+
+@media (max-width: 860px) {
+  .three {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+  }
+}

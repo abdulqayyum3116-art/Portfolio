@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import styles from './Ways.module.css'
 
-const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? '#call'
+import { bookingUrl } from '@/lib/booking'
 
 function MagneticBtn({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
   const x = useMotionValue(0)
